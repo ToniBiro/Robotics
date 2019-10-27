@@ -6,7 +6,7 @@ void setup() {
   Serial.begin(9600);
   pinMode(pushButton, INPUT);
 }
-
+int pushed = 0;
 void loop() {
   // put your main code here, to run repeatedly:
   int buttonState = digitalRead(pushButton);
