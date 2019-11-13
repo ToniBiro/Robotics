@@ -53,11 +53,11 @@ void play_song()
 void loop() {
   
   p_buzzer_value = analogRead(p_buzzer);
-
   int button_reading = digitalRead(button);
 
   if(p_buzzer_value != 0)
     Serial.println(p_buzzer_value);
+  
   if(p_buzzer_value >= 600)
   {
     play = true;
@@ -73,14 +73,9 @@ void loop() {
       play = false;
     }
   }
-  
   if(button_reading == 0)
   {
     noTone(a_buzzer);
   }
-
-  
-  
   delay(100);
-  
 }
