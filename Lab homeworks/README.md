@@ -10,3 +10,4 @@ In addition, (I was having a little fun), added a button and a buzzer so that th
 
 ## Lab 3 homework - Build a knock detector using a passive and an active Piezo Buzzer
 I attached on the breadboard the 2 Piezo Buzzers and a button. I read the input from the passive one and if a certain threshold is reached the active buzzer starts playing a tone after a 5 sec delay. It can be stopped by pushing the button.
+![alt text](https://github.com/ToniBiro/Robotics/blob/master/Lab%20homeworks/passiveBuzzer/Tremendous%20Duup-Blorr.png)
