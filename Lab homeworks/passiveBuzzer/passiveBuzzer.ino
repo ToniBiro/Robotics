@@ -58,7 +58,7 @@ void loop() {
   if(p_buzzer_value != 0)
     Serial.println(p_buzzer_value);
   
-  if(p_buzzer_value >= 600)
+  if(p_buzzer_value >= 1)
   {
     play = true;
   }
