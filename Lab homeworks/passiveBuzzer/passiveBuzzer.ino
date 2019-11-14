@@ -69,7 +69,7 @@ void loop() {
   {
     if(millis() - last_time >= 5000)
     {
-      tone(a_buzzer, 1000);
+      tone(a_buzzer, NOTE_G3);
       play = false;
     }
   }
