@@ -67,7 +67,6 @@ int swState = 0;
 void loop() {
   x_value = analogRead(pin_x);
   y_value = analogRead(pin_y);
-  sw_value = digitalRead(pin_sw);
 
   if (x_value < min_threshold && joy_moved == false) {
   if (digit > 0) {
