@@ -96,16 +96,53 @@ int dpState = 0;
 int selectedDigit = 0;
 int currentNumbers[4] = {0, 0, 0, 0};
 int currentDigit = 0;
+int buttonState = 1;
+int lastButtonState = 1;
+int lastDebounceTime = 0;
+int debounceDelay = 0;
+int delayInterval = 100;
+int lastValue;
+
+void debounce(bool reading){
+  if (reading != lastButtonState) {
+    // reset the debouncing timer
+    lastDebounceTime = millis();
+  }
+
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    // whatever the reading is at, it's been there for longer than the debounce
+    // delay, so take it as the actual current state:
+
+    // if the button state has changed:
+    if (reading != buttonState) {
+      buttonState = reading;
+
+      // only toggle the LED if the new button state is HIGH
+      if (buttonState == LOW) {
+        swState = !swState;
+      }
+    }
+  }
+}
 
 void loop()
 {
-  
   xValue = analogRead(xPin);
   yValue = analogRead(yPin);
+
+  if (xValue < minThreshold && joyMoved == false && swState == 1) {
+    if (currentNumbers[currentDigit] > 0) {
+        currentNumbers[currentDigit]--;
+    } else {
+        currentNumbers[currentDigit] = 9;
+    }
+    joy_moved = true;
+  }
   
-  if (xValue > maxThreshold && joyMoved == false && swState == LOW) {
+  if (xValue > maxThreshold && joyMoved == false && swState == 1) {
     if (currentNumbers[currentDigit] < 9) {
         currentNumbers[currentDigit]++;
+
     } else {
         currentNumbers[currentDigit] = 0;
     }
@@ -115,16 +152,38 @@ void loop()
   if (xValue >= minThreshold && xValue <= maxThreshold) {
     joyMoved= false;
   }
+
+  if(yValue < minThreshold && joyMoved == false && swState == 0){
+    currentDigit = (currentDigit-1)%4;
+    joyMoved = true;
+  }
   
-  swState = analogRead(swPin);
-  Serial.println(swState);
-  Serial.println(xValue);
-  if (swState !=  lastSwState) {
-    if (swState == LOW) {
-        dpState = !dpState;
+  if(yValue > maxThreshold && joyMoved == false && swState == 0){
+    currentDigit = (currentDigit+1)%4;
+    joyMoved = true;
+  }
+
+  if (yValue >= minThreshold && yValue <= maxThreshold) {
+    joyMoved= false;
+  }
+  
+  
+  swRead = analogRead(swPin);
+  debounce(swRead>0);
+
+  if(swState == 0){
+    
+    if(millis() - lastValue> delayInterval)
+    {
+      dpState = !dpState;
+      lastValue = millis();
+    } 
+  }
+  else{
+    if(swState == 1){
+      dpState = HIGH;
     }
   }
-  lastSwState = swState;
 
   showDigit(currentDigit);
   displayNumber(currentNumbers[currentDigit], dpState);
