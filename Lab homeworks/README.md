@@ -11,3 +11,6 @@ In addition, (I was having a little fun), added a button and a buzzer so that th
 ## Lab 3 homework - Build a knock detector using a passive and an active Piezo Buzzer
 I attached on the breadboard the 2 Piezo Buzzers and a button. I read the input from the passive one and if a certain threshold is reached the active buzzer starts playing a tone after a 5 sec delay. It can be stopped by pushing the button.
 ![alt text](https://github.com/ToniBiro/Robotics/blob/master/Lab%20homeworks/passiveBuzzer/Tremendous%20Duup-Blorr.png)
+
+## Lab 4 homework - Control a 4-digit 7-segment display
+With the help of a joyStick we control using the x axis to increase or decrease the digit currently selected from the 4, with the y axis we choose which digit to change, and with the sw bitton we interchange between the two axis.
