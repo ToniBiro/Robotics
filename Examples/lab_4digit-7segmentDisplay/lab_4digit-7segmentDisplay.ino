@@ -19,6 +19,7 @@ const int seg_size = 8;
 int currentNumber = 0;
 unsigned long delayCounting = 500; // incrementing interval
 unsigned long lastIncreasing = 0;
+int dpState = 0;
 const int noOfDisplays = 4;
 const int noOfDigits = 10;
 
@@ -63,10 +64,6 @@ void showDigit(int num)
   digitalWrite(digits[num], LOW);
 }
 
-const int xPin = A0;
-const int yPin = A1;
-const int swPin = A2;
-
 void setup() 
 {
   for (int i = 0; i < seg_size - 1; i++)
@@ -78,54 +75,32 @@ void setup()
     pinMode(digits[i], OUTPUT);
   }
   Serial.begin(9600);
-  pinMode(xPin, INPUT);
-  pinMode(yPin, INPUT);
-  pinMode(swPin, INPUT);
 }
-
-const int minThreshold = 400;
-const int maxThreshold = 600;
-int xValue;
-int yValue;
-int swValue;
-bool joyMoved = false;
-
-int lastSwState = 0;
-int swState = 0;
-int dpState = 0;
-int selectedDigit = 0;
-int currentNumbers[4] = {0, 0, 0, 0};
-int currentDigit = 0;
 
 void loop()
 {
+  int number;
+  int digit;
+  int lastDigit;
   
-  xValue = analogRead(xPin);
-  yValue = analogRead(yPin);
+  Serial.println(currentNumber);
   
-  if (xValue > maxThreshold && joyMoved == false && swState == LOW) {
-    if (currentNumbers[currentDigit] < 9) {
-        currentNumbers[currentDigit]++;
-    } else {
-        currentNumbers[currentDigit] = 0;
-    }
-    joyMoved = true;
+  number = currentNumber;
+  digit = 0;
+  while (number != 0)
+  {
+    lastDigit = number % 10; // get the last digit
+    showDigit(digit);
+    displayNumber(lastDigit, HIGH);
+    // increase this delay to see multiplexing in action. At about 100 it becomes obvious
+    delay(5);
+    digit++; // move to next display
+    number = number / 10;
   }
-
-  if (xValue >= minThreshold && xValue <= maxThreshold) {
-    joyMoved= false;
+  // increment the number
+  if (millis() - lastIncreasing >= delayCounting)
+  {
+    currentNumber = (currentNumber + 1) % 10000;
+    lastIncreasing = millis();
   }
-  
-  swState = analogRead(swPin);
-  Serial.println(swState);
-  Serial.println(xValue);
-  if (swState !=  lastSwState) {
-    if (swState == LOW) {
-        dpState = !dpState;
-    }
-  }
-  lastSwState = swState;
-
-  showDigit(currentDigit);
-  displayNumber(currentNumbers[currentDigit], dpState);
 }
