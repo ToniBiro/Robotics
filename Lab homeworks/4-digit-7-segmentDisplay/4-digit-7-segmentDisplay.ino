@@ -51,7 +51,7 @@ void displayNumber(byte digit, byte dp)
     digitalWrite(segments[i], digit_matrix[digit][i]); 
   }
 
-  digitalWrite(segments[seg_size - 1], dp);
+  digitalWrite(segments[seg_size - 1], HIGH);
 }
 
 void showDigit(int num)
@@ -80,7 +80,7 @@ void setup()
   Serial.begin(9600);
   pinMode(xPin, INPUT);
   pinMode(yPin, INPUT);
-  pinMode(swPin, INPUT);
+  pinMode(swPin, INPUT_PULLUP);
 }
 
 const int minThreshold = 400;
@@ -92,9 +92,10 @@ bool joyMoved = false;
 
 int lastSwState = 0;
 int swState = 0;
-int dpState = 0;
+int swRead = 0;
+int dpState = HIGH;
 int selectedDigit = 0;
-int currentNumbers[4] = {0, 0, 0, 0};
+int currentNumbers[4] = {1, 0, 0, 8};
 int currentDigit = 0;
 int buttonState = 1;
 int lastButtonState = 1;
@@ -127,6 +128,7 @@ void debounce(bool reading){
 
 void loop()
 {
+  Serial.println(swState);
   xValue = analogRead(xPin);
   yValue = analogRead(yPin);
 
@@ -136,7 +138,7 @@ void loop()
     } else {
         currentNumbers[currentDigit] = 9;
     }
-    joy_moved = true;
+    joyMoved = true;
   }
   
   if (xValue > maxThreshold && joyMoved == false && swState == 1) {
@@ -149,35 +151,37 @@ void loop()
     joyMoved = true;
   }
 
-  if (xValue >= minThreshold && xValue <= maxThreshold) {
-    joyMoved= false;
-  }
-
   if(yValue < minThreshold && joyMoved == false && swState == 0){
-    currentDigit = (currentDigit-1)%4;
+    if (currentDigit > 0) {
+        currentDigit--;
+
+    } else {
+        currentDigit = 3;
+    }
     joyMoved = true;
   }
   
   if(yValue > maxThreshold && joyMoved == false && swState == 0){
-    currentDigit = (currentDigit+1)%4;
+    if (currentDigit < 3) {
+        currentDigit++;
+
+    } else {
+        currentDigit = 0;
+    }
     joyMoved = true;
   }
 
-  if (yValue >= minThreshold && yValue <= maxThreshold) {
+  if (xValue >= minThreshold && xValue <= maxThreshold && yValue >= minThreshold && yValue <= maxThreshold) {
     joyMoved= false;
   }
   
   
-  swRead = analogRead(swPin);
+  swRead = digitalRead(swPin);
   debounce(swRead>0);
 
   if(swState == 0){
     
-    if(millis() - lastValue> delayInterval)
-    {
-      dpState = !dpState;
-      lastValue = millis();
-    } 
+    dpState = LOW;
   }
   else{
     if(swState == 1){
@@ -185,6 +189,11 @@ void loop()
     }
   }
 
-  showDigit(currentDigit);
-  displayNumber(currentNumbers[currentDigit], dpState);
+  for(int i = 0; i < 4; ++i){
+    showDigit(i);
+    displayNumber(currentNumbers[i], dpState);
+    delay(5);
+  }
+  
+  
 }
