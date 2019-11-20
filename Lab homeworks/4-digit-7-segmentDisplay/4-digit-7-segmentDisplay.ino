@@ -182,6 +182,11 @@ void loop()
   if(swState == 0){
     
     dpState = LOW;
+//    if(millis() - lastValue> delayInterval)
+//    {
+//      dpState = !dpState;
+//      lastValue = millis();
+//    } 
   }
   else{
     if(swState == 1){
