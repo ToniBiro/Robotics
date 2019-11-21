@@ -52,7 +52,7 @@ void displayNumber(byte digit, byte dp)
     digitalWrite(segments[i], digit_matrix[digit][i]); 
   }
 
-  digitalWrite(segments[seg_size - 1], dp);
+  digitalWrite(segments[seg_size - 1], HIGH);
 }
 
 void showDigit(int num)
@@ -91,7 +91,7 @@ void loop()
   {
     lastDigit = number % 10; // get the last digit
     showDigit(digit);
-    displayNumber(lastDigit, HIGH);
+    displayNumber(lastDigit, 1);
     // increase this delay to see multiplexing in action. At about 100 it becomes obvious
     delay(5);
     digit++; // move to next display

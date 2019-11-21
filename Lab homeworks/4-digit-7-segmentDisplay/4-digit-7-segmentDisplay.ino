@@ -51,7 +51,7 @@ void displayNumber(byte digit, byte dp)
     digitalWrite(segments[i], digit_matrix[digit][i]); 
   }
 
-  digitalWrite(segments[seg_size - 1], HIGH);
+  digitalWrite(segments[seg_size - 1], dp);
 }
 
 void showDigit(int num)
@@ -95,7 +95,7 @@ int swState = 0;
 int swRead = 0;
 int dpState = HIGH;
 int selectedDigit = 0;
-int currentNumbers[4] = {1, 0, 0, 8};
+int currentNumbers[4] = {0, 0, 0, 0};
 int currentDigit = 0;
 int buttonState = 1;
 int lastButtonState = 1;
@@ -152,16 +152,6 @@ void loop()
   }
 
   if(yValue < minThreshold && joyMoved == false && swState == 0){
-    if (currentDigit > 0) {
-        currentDigit--;
-
-    } else {
-        currentDigit = 3;
-    }
-    joyMoved = true;
-  }
-  
-  if(yValue > maxThreshold && joyMoved == false && swState == 0){
     if (currentDigit < 3) {
         currentDigit++;
 
@@ -170,14 +160,22 @@ void loop()
     }
     joyMoved = true;
   }
+  
+  if(yValue >  maxThreshold && joyMoved == false && swState == 0){
+     if (currentDigit > 0) {
+        currentDigit--;
+
+    } else {
+        currentDigit = 3;
+    }
+    joyMoved = true;
+  }
 
   if (xValue >= minThreshold && xValue <= maxThreshold && yValue >= minThreshold && yValue <= maxThreshold) {
     joyMoved= false;
   }
   
-  
-  swRead = digitalRead(swPin);
-  debounce(swRead>0);
+  debounce(digitalRead(swPin));
 
   if(swState == 0){
     
