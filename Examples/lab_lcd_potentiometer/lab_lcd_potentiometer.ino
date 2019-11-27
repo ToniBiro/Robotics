@@ -51,7 +51,6 @@ void loop() {
     lcd.print("Duration: ");
     lcd.print(duration);
     delay(10);
-
   }
 }
 
