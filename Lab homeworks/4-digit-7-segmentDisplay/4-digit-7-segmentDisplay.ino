@@ -124,6 +124,7 @@ void debounce(bool reading){
       }
     }
   }
+  lastButtonState = reading;
 }
 
 void loop()
@@ -170,7 +171,7 @@ void loop()
     }
     joyMoved = true;
   }
-
+  
   if (xValue >= minThreshold && xValue <= maxThreshold && yValue >= minThreshold && yValue <= maxThreshold) {
     joyMoved= false;
   }
