@@ -14,3 +14,7 @@ I attached on the breadboard the 2 Piezo Buzzers and a button. I read the input 
 
 ## Lab 4 homework - Control a 4-digit 7-segment display
 With the help of a joyStick we control using the x axis to increase or decrease the digit currently selected from the 4, with the y axis we choose which digit to change, and with the sw bitton we interchange between the two axis.
+
+## Lab 5 homework - Game menu
+Using a joyStick you can go through the menu: Stat (that starts the game), Settings (where you can change the level and the name of the player) and HighScore (where the highest score is stored using EEPROM).
+[video]https://drive.google.com/open?id=187o7T9y2GB9MaUc-WOK5EwTErckCTXkD
