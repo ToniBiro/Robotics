@@ -46,8 +46,6 @@ void print_highScore(){
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("HighScore:");
-  lcd.setCursor(0, 1);
-  lcd.print("Name:");
 }
 
 void print_settings(){
@@ -109,7 +107,7 @@ int level = 1;
 int lives = 3;
 unsigned long initEntryTime;
 unsigned long entryTime;
-char player[10]; 
+char player[8];
 char inChar; 
 byte index = 0;
 
@@ -120,8 +118,6 @@ void loop() {
   xValue = analogRead(xPin);
   yValue = analogRead(yPin);
   debounce(digitalRead(swPin));
-
-  Serial.println(swState);
   
   if (yValue > maxThreshold && joyMoved == false && swState == 1) {
     if(cursorPosition >= 3)
@@ -186,6 +182,8 @@ void loop() {
       print_settings();
       lcd.setCursor(0, 0);
       lcd.print(">");
+      lcd.setCursor(6, 1);
+      lcd.print(player);
       check = false;
     }
     if(yValue > maxThreshold && joyMoved == false){
@@ -208,8 +206,8 @@ void loop() {
       joyMoved = true;
     }
     if(xValue > maxThreshold && joyMoved == false && settingsCursor == 1){
-      if(level >= 10){
-        level = 10;
+      if(level >= 9){
+        level = 9;
       }
       else{
         level++;
@@ -231,50 +229,30 @@ void loop() {
     if(settingsCursor == 2){
       if(Serial.available() > 0){
         
-        if(index < 19) // One less than the size of the array
-        {
+        if(index < 7){ // One less than the size of the array
           inChar = Serial.read(); // Read a character
           player[index] = inChar; // Store it
           index++; // Increment where to write next
-          player[index] = ' ';
-        }
-        
-        lcd.setCursor(6, 1);
-        lcd.print(player);
-        addr = 2;
-        EEPROM.write(addr, strlen(player));
-        addr++;
-        int i;
-        for(int i = 0; i < strlen(player); ++i){
-          EEPROM.write(addr, player[i]);
-          addr++;
+          player[index] = '\0';
         }
       }
+      lcd.setCursor(6, 1);
+      lcd.print(player);
     }
   }
 
+
   if(cursorPosition == 3 && swState == 0){
     int hs;
-    char name_player[10];
     if(check == true){
       print_highScore();
       int aux_addr = 0;
       hs = EEPROM.read(aux_addr);
       aux_addr++;
-      int i, n = EEPROM.read(aux_addr);
-      aux_addr++;
-      for(i = 0; i < n; ++i){
-        name_player[i] = EEPROM.read(aux_addr);
-        aux_addr++;
-      }
       check = false;
-    }
-    
-    
+    }   
     lcd.setCursor(10, 0);
     lcd.print(hs);
-    lcd.setCursor(5, 1);
-    lcd.print(name_player);
   }
   
   if (xValue >= minThreshold && xValue <= maxThreshold && yValue >= minThreshold && yValue <= maxThreshold) {
