@@ -10,6 +10,6 @@ The "dino" will be controlled with a joystick and by pressing the joystick he wi
 - 2 MAX7219 Drivers
 - buzzer - buzzes when a player dies
 
-It will have two scores for each player, a single high score, the number of lives
+It will have two scores for each player, a single high score and the number of lives.
 
 ## Schematics
