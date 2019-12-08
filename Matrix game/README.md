@@ -22,7 +22,7 @@ Both players scores increases as time passes and the rate at which the score inc
 ## Technical requirements
 - will use 2 joysticks
 - 2 8x8 matrices
-- LCD - to show the two player scores and the highscore (the highscore will be stored in the EEPROM
+- LCD - to show the two player scores and the highscore (the highscore will be stored in the EEPROM)
 - 2 MAX7219 Drivers
 - buzzer - buzzes when a player dies
 - possibly a button to turn on and off the game
