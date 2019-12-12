@@ -15,6 +15,7 @@ My game will look somewhat similar to this:
 It will have the option of a single-player and 2 players. Two 8x8 displays will be used to make the display longer. There will be the standard cactus and the bird that will come towards the player and if they touch one life will be lost out of the 3 the player started with.
 The "dino" will be controlled with a joystick and by pressing the joystick he will attack. If the attack happens while he is in the air it is possible to hit the second player if this one is also at that height.
 The game will end the moment one of the players remains with 0 lives and the player with the highest score wins.
+(If a player avoids getting hit by 100 obstacles he will gain one new life.)
 
 #### How can you gain points?
 Both players scores increases as time passes and the rate at which the score increases is directly proportional to the speed of the dino. When you get hit by something your score drops.
@@ -28,4 +29,3 @@ Both players scores increases as time passes and the rate at which the score inc
 - possibly a button to turn on and off the game
 
 It will have two scores for each player, a single high score and the number of lives.
-
