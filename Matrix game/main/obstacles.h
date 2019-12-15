@@ -2,14 +2,20 @@
 #include "global_variables.h"
 
 void set_obstacle(){
-  if((frame1+1) * (gameSpeed/nObstacle) > millis() - startTime && millis() - startTime >= frame1*(gameSpeed/nObstacle) && here == 1){
+  if((frame1+1) * (speedConst/gameSpeed) > millis() - startTime && millis() - startTime >= frame1*(speedConst/gameSpeed) && here == 1){
       lc.setRow(0, heightObstacle1, obstacle[idx1][frame1]);
       lc.setRow(0, heightObstacle2, obstacle[idx2][frame2]);
       here = 0;
       frame1++;
+      if(frame1 == nObstacle){
+        lifeGainCounter1 += 1;
+      }
       frame2--;
+      if(frame2 == 0){
+        lifeGainCounter2 += 1;
+      }
   }
-  if(frame1 * (gameSpeed/nObstacle) <= millis() - startTime){
+  if(frame1 * (speedConst/gameSpeed) <= millis() - startTime){
     here = 1;
   }
 }

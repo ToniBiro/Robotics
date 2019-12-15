@@ -317,10 +317,21 @@ void loop(){
       scoreDino2 = 0;
       livesDino1 = 3;
       livesDino2 = 3;
+      lifeGainCounter1 = 0;
+      lifeGainCounter2 = 0;
       startTime = millis();
+      speedTimer = millis();
       canTheGameStart = 0;
     }
     inGame();
+    
+    if(millis() - speedTimer >= 10000){
+      gameSpeed += 50;
+      speedTimer = millis();
+    }
+    if(swState == 1){
+      swState = 0;
+    }
   }
 
   if(lcdState == 6){
@@ -336,6 +347,7 @@ void loop(){
   if(lcdState == 8){ // this lcdState is more like 6.1 state than 8 -- sorry --
     if(beatHS != 0){
       print_new_hs();
+      // memoreaza in eeprom hs-ul
       beatHS = 0;
     }
     if(swState == 1){

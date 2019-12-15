@@ -52,8 +52,13 @@ cursorPoz cpPrev;
 dino dino1 = {6, 1, 5, 1};
 dino dino2 = {2, 6, 1, 6};
 int upCheck = 0, downCheck = 0;
-unsigned long gameSpeed = 4000;
+double gameSpeed = 5000;
+const double speedConst = 2500000;
+const double jumpConst = 2500;
+unsigned long speedTimer;
 unsigned long downTime, upTime;
+int var = 4;
+double jumpInterval = gameSpeed/2/var;
 
 
 struct highScore{
@@ -72,12 +77,10 @@ char nameDino1[5], nameDino2[5];
 double scoreDino1 = 0, scoreDino2 = 0;
 int livesDino1 = 3, livesDino2 = 3;
 
-int var = 4;
 int first = 1, sec, third, four;
 int done = 1;
 
 int nObstacle = 14;
-
 unsigned long startTime = 0;
 
 
@@ -115,3 +118,5 @@ int check7;
 int canTheGameStart = 0;
 
 int check6 = 1;
+
+int lifeGainCounter1 = 0, lifeGainCounter2 = 0;

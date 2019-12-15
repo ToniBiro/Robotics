@@ -21,12 +21,14 @@ dino poz_dino(dino d){
 
 void dino_jump(){
   if(downCheck == 1){
-    var += 2;
+    var += gameSpeed/jumpConst;
     downCheck = 0;
   }
-  if(2*(gameSpeed/2/var) > millis() - upTime && millis() - upTime >= 1*(gameSpeed/2/var)){first = 0; sec = 1; third = 0; four = 0;}
-  if(3*(gameSpeed/2/var) > millis() - upTime && millis() - upTime >= 2*(gameSpeed/2/var)){first = 0; sec = 0; third = 1; four = 0;}
-  if(millis() - upTime >= 3*(gameSpeed/2/var)){first = 0; sec = 0; third = 0; four = 1;}
+  
+  Serial.println(gameSpeed/jumpConst);
+  if(2*(jumpInterval) > millis() - upTime && millis() - upTime >= 1*(jumpInterval)){first = 0; sec = 1; third = 0; four = 0;}
+  if(3*(jumpInterval) > millis() - upTime && millis() - upTime >= 2*(jumpInterval)){first = 0; sec = 0; third = 1; four = 0;}
+  if(millis() - upTime >= 3*(jumpInterval)){first = 0; sec = 0; third = 0; four = 1;}
   if(first == 1){
     dino1.fp.x = 5;
     dino1.fp.y = 1;
@@ -168,6 +170,7 @@ void inGame(){
   if(dino1Collision == 1 && colFlag1 == 0){
     colFlag1 = 1;
     livesDino1 -= 1;
+    scoreDino1 -= gameSpeed/(scoreDino1*100);
   }
   
   if(dino1Collision == 1){
@@ -183,14 +186,14 @@ void inGame(){
   if(dino2Collision == 1 && colFlag2 == 0){
     colFlag2 = 1;
     livesDino2 -= 1;
+    scoreDino2 -= gameSpeed/(scoreDino2*10);
   }
   
-  if(dino2Collision == 1 && colFlag2 == 0){
-    colFlag2 = 1;
-    livesDino2 -= 1;
+  if(dino2Collision == 1){
+    dino2Collision = 0;
     tone(buzzer, 500);
     noTone(buzzer);
-  }  
+  }
 
   if(livesDino1 <= 0 || livesDino2 <= 0){
     lcdState = 6;
@@ -207,5 +210,14 @@ void inGame(){
 
   update_highscore();
   print_realtime_game_data();
+  
+  if(lifeGainCounter1 >= 5){
+    livesDino1 += 1;
+    lifeGainCounter1 = 0;
+  }
+  if(lifeGainCounter2 >= 5){
+    livesDino2 += 1;
+    lifeGainCounter2 = 0;
+  }
   
 }
