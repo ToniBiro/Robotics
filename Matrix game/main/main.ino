@@ -44,7 +44,7 @@ void print_intro(){
   lcd.setCursor(0, 0);
   lcd.print("THE DINO GAME!");
   lcd.setCursor(0, 1);
-  lcd.print("PRESS THE BUTTON");
+  lcd.print("Press the button");
 }
 
 void print_main_menu(){
@@ -139,7 +139,7 @@ void print_play_again(){
   lcd.setCursor(1, 0);
   lcd.print("Play again?");
   lcd.setCursor(1, 1);
-  lcd.print("Back to Main Menu");
+  lcd.print("Back to Menu");
 }
 
 //###### end menu code##################
@@ -305,12 +305,14 @@ void loop(){
     // start the game
     if(canTheGameStart == 1){
       lcd.clear();
-      lcd.setCursor(8, 0);
+      lcd.setCursor(5, 0);
       lcd.print("READY?");
-      lcd.setCursor(7, 1);
+      lcd.setCursor(4, 1);
       lcd.print("START!!");
       delay(2000);
       print_play();
+      idx1 = 0;
+      idx2 = 0;
       scoreDino1 = 0;
       scoreDino2 = 0;
       livesDino1 = 3;
@@ -326,18 +328,21 @@ void loop(){
       print_end_message();
       check6 = 0;
     }
-    
+    if(swState == 1){
+      lcdState = 8;
+      swState = 0;
+    }
+  }
+  if(lcdState == 8){ // this lcdState is more like 6.1 state than 8 -- sorry --
     if(beatHS != 0){
       print_new_hs();
-      
       beatHS = 0;
     }
-    lcdState = 7;
     if(swState == 1){
+      swState = 0;
       check7 = 1;
       lcdState = 7;
     }
-    
   }
 
   if(lcdState == 7){

@@ -89,7 +89,6 @@ void dino_bend(){
 }
 
 void inGame(){
-  
   // first joystick //
   if (xValue < minThreshold && joyMoved == false && swState == 0) {
     if(attackCheck == 0){

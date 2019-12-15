@@ -2,18 +2,22 @@
 #include "global_variables.h"
 
 void check_collisinos(){
-  if(idx == 0 && frame == 8 || idx == 1 && frame == 7 || idx == 1 && frame == 8 || idx == 2 && frame == 7){
-    if(heightObstacle == dino1.fp.x || heightObstacle == dino1.sp.x){
+  if(idx1 == 1 && frame1 == 8 || idx1 == 2 && frame1 == 7 || idx1 == 2 && frame1 == 8 || idx1 == 3 && frame1 == 7){
+    if(heightObstacle1 == dino1.fp.x || heightObstacle1 == dino1.sp.x){
       dino1Collision = 1;
     }
   }
-  if(idx == 2 && frame == 8 || idx == 2 && frame == 12 || idx == 3 && frame == 8 || idx == 3 && frame == 12){
-   if(heightObstacle == dino1.fp.x || heightObstacle == dino1.sp.x){
+  if(idx1 == 3 && frame1 == 8 || idx1 == 3 && frame1 == 12 || idx1 == 4 && frame1 == 8 || idx1 == 4 && frame1 == 12){
+   if(heightObstacle1 == dino1.fp.x || heightObstacle1 == dino1.sp.x){
       dino1Collision = 1;
     }
   }
 
   if(attackCheck == 1){
-    
+    if(attackFrame == 2){
+      if(attackHeight == dino2.fp.x || attackHeight == dino2.sp.x){
+        dino2Collision = 1;
+      }
+    }
   }
 }
