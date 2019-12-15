@@ -34,9 +34,9 @@ unsigned char X[] = {B00000000,B01000010,B00100100,B00011000,B00011000,B00100100
 unsigned char Y[] = {B00000000,B01000100,B00101000,B00010000,B00010000,B00010000,B00010000,B00000000};
 unsigned char Z[] = {B00000000,B00111100,B00000100,B00001000,B00010000,B00100000,B00111100,B00000000};
 
-const int swPin = 9;
-const int xPin = A0;
-const int yPin = A1;
+const int swPin = 2;
+const int xPin = A1;
+const int yPin = A0;
 
 struct cursorPoz{
   int x, y;
@@ -105,7 +105,7 @@ void setup()
   Serial.begin(9600);
   pinMode(xPin, INPUT);
   pinMode(yPin, INPUT);
-  pinMode(swPin, INPUT);
+  pinMode(swPin, INPUT_PULLUP);
   // the zero refers to the MAX7219 number, it is zero for 1 chip
   lc.shutdown(0, false); // turn off power saving, enables display
   lc.setIntensity(0, 6); // sets brightness (0~15 possible values)
@@ -141,8 +141,7 @@ void loop()
   yValue = analogRead(yPin);
   int swValue = digitalRead(swPin);
   debounce(swValue);
-  Serial.println(cp.x);
-  Serial.println(cp.y);
+  Serial.println(swState);
 //  Serial.println(swState);
   
   if (xValue > maxThreshold && joyMoved == false && swState == 0) {
