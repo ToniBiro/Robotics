@@ -57,8 +57,8 @@ const double speedConst = 2500000;
 const double jumpConst = 2500;
 unsigned long speedTimer;
 unsigned long downTime, upTime;
-int var = 4;
-double jumpInterval = gameSpeed/2/var;
+double var = 8;
+double jumpInterval = (20000000/(gameSpeed*var));
 
 
 struct highScore{

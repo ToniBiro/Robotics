@@ -325,8 +325,8 @@ void loop(){
     }
     inGame();
     
-    if(millis() - speedTimer >= 10000){
-      gameSpeed += 50;
+    if(millis() - speedTimer >= 5000){
+      gameSpeed += 100;
       speedTimer = millis();
     }
     if(swState == 1){

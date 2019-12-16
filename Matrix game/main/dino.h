@@ -21,10 +21,10 @@ dino poz_dino(dino d){
 
 void dino_jump(){
   if(downCheck == 1){
-    var += gameSpeed/jumpConst;
+    var += 10000;
     downCheck = 0;
   }
-  
+  jumpInterval = (20000000/(gameSpeed*var));
   Serial.println(gameSpeed/jumpConst);
   if(2*(jumpInterval) > millis() - upTime && millis() - upTime >= 1*(jumpInterval)){first = 0; sec = 1; third = 0; four = 0;}
   if(3*(jumpInterval) > millis() - upTime && millis() - upTime >= 2*(jumpInterval)){first = 0; sec = 0; third = 1; four = 0;}
