@@ -40,11 +40,11 @@ void update_highscore(){
 
 void print_realtime_game_data(){
   lcd.setCursor(0, 1);
-  lcd.print(scoreDino1);
+  lcd.print(scoreDino2);
   lcd.setCursor(9, 1);
   lcd.print(scoreDino1);
   lcd.setCursor(1, 0);
-  lcd.print(livesDino1);
-  lcd.setCursor(14, 0);
   lcd.print(livesDino2);
+  lcd.setCursor(11, 0);
+  lcd.print(livesDino1);
 }

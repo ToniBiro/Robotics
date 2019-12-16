@@ -59,25 +59,25 @@ void print_main_menu(){
   lcd.print("Info"); 
 }
 
-void print_play(){
+void printPlay(){
   lcd.clear();
+  lcd.setCursor(1, 0);
+  lcd.print(livesDino2);
+  lcd.setCursor(11, 0);
+  lcd.print(livesDino1);
+  lcd.setCursor(0, 1);
+  lcd.print(scoreDino2);
+  lcd.setCursor(9, 1);
+  lcd.print(scoreDino1);
+  lcd.setCursor(7, 1);
+  lcd.print("::");
   lcd.setCursor(0, 0);
   lcd.write(byte(0));
   lcd.setCursor(15, 0);
   lcd.write(byte(0));
-  lcd.setCursor(7, 1);
-  lcd.print("::");
-  lcd.setCursor(1, 0);
-  lcd.print(livesDino1);
-  lcd.setCursor(14, 0);
-  lcd.print(livesDino2);
-  lcd.setCursor(0, 1);
-  lcd.print(scoreDino1);
-  lcd.setCursor(9, 1);
-  lcd.print(scoreDino2);
 }
 
-void print_end_message(){
+void printEndMessage(){
   lcd.clear();
   if(scoreDino1 > scoreDino2){
     lcd.setCursor(0, 0);
@@ -132,7 +132,7 @@ void print_new_hs(){
   }
 }
 
-void print_play_again(){
+void printPlayAgain(){
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print(">");
@@ -142,11 +142,29 @@ void print_play_again(){
   lcd.print("Back to Menu");
 }
 
+void printPause(){
+  lcd.clear();
+  lcd.setCursor(1, 0);
+  lcd.print("PAUSE...");
+  lcd.setCursor(9, 0);
+  lcd.print("Press");
+  lcd.setCursor(0, 1);
+  lcd.print("any JS to resume");
+}
+
+void printReadyPlayersJS(){
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("To start press");
+  lcd.setCursor(0, 1);
+  lcd.print("both of the JS's");
+}
+
 //###### end menu code##################
 
 //######debounce code##################
 
-void debounce(bool reading){
+void debounceDino1(bool reading){
   if (reading != lastSwState) {
     lastSwDebounceTime = millis();
   }
@@ -161,6 +179,23 @@ void debounce(bool reading){
     }
   }
   lastSwState = reading;
+}
+
+void debounceDino2(bool reading){
+  if (reading != lastSwState2) {
+    lastSwDebounceTime2 = millis();
+  }
+
+  if ((millis() - lastSwDebounceTime2) > debounceDelay) {
+    if (reading != pushSwState2) {
+      pushSwState2 = reading;
+
+      if (pushSwState2 == HIGH) {
+        swState2 = !swState2;
+      }
+    }
+  }
+  lastSwState2 = reading;
 }
 
 void debounceButton(bool reading){
@@ -211,7 +246,7 @@ void setup()
   }
   
   strcpy(nameDino1, "AAAA");
-  strcpy(nameDino2, "AAAA");
+  strcpy(nameDino2, "BBBB");
   srand(time(NULL));
   
   Serial.begin(9600);
@@ -222,7 +257,10 @@ void setup()
   
   pinMode(xPin, INPUT);
   pinMode(yPin, INPUT);
+  pinMode(xPin2, INPUT);
+  pinMode(yPin2, INPUT);
   pinMode(swPin, INPUT_PULLUP);
+  pinMode(swPin2, INPUT_PULLUP);
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(buzzer, OUTPUT);
   // the zero refers to the MAX7219 number, it is zero for 1 chip
@@ -239,19 +277,27 @@ void loop(){
   
   xValue = analogRead(xPin);
   yValue = analogRead(yPin);
+  xValue2 = analogRead(xPin2);
+  yValue2 = analogRead(yPin2);
   int swValue = digitalRead(swPin);
+  int swValue2 = digitalRead(swPin2);
+  
   debounceButton(digitalRead(buttonPin));
-  debounce(swValue);
+  debounceDino1(swValue);
+  debounceDino2(swValue2);
+  Serial.println(swState2);
 
   if(buttonState == 1 && checkButton == 0){
+    lcd.clear();
     print_intro();
     checkButton = 1;
+    lcdState = 0;
   }
 
   if(buttonState == 0 && checkButton == 1){
     checkButton = 0;
     swState = 1;
-    lcdState = 0;
+    lcdState = 0;    
   }
 
   if(swState == 1 && lcdState == 0 && buttonState == 0){
@@ -296,9 +342,21 @@ void loop(){
     joyMoved= false;
   }
 
-  if(swState == 0 && cursorPosition == 1 && lcdState == 1){
-    lcdState = 2;
+  if(swState == 0 && cursorPosition == 1 && lcdState == 1 || swState2 == 0 && cursorPosition == 1 && lcdState == 1){
+    lcdState = 10;
+    check10 = 1;
     canTheGameStart = 1;
+  }
+
+  if(lcdState == 10){
+    if(check10 == 1){
+      printReadyPlayersJS();
+      check10 = 0;
+    }
+    if(swState == 0 && swState2 == 0){
+      lcdState = 2;
+      printPlay();
+    }
   }
 
   if(lcdState == 2){
@@ -310,38 +368,61 @@ void loop(){
       lcd.setCursor(4, 1);
       lcd.print("START!!");
       delay(2000);
-      print_play();
       idx1 = 0;
       idx2 = 0;
       scoreDino1 = 0;
       scoreDino2 = 0;
-      livesDino1 = 3;
-      livesDino2 = 3;
+      livesDino1 = 5;
+      livesDino2 = 5;
+      printPlay();
       lifeGainCounter1 = 0;
       lifeGainCounter2 = 0;
       startTime = millis();
+      scoreTime1 = millis();
+      scoreTime2 = millis();
       speedTimer = millis();
       canTheGameStart = 0;
     }
     inGame();
     
-    if(millis() - speedTimer >= 5000){
-      gameSpeed += 100;
+    if(millis() - speedTimer >= 6000){
+      gameSpeed += 300;
       speedTimer = millis();
     }
-    if(swState == 1){
+    if(swState == 1 || swState2 == 1){
+      lcdState = 9;
+    }
+  }
+
+  if(lcdState == 9){
+    if(check9 == 1){
+      printPause();
+      check9 = 0;
       swState = 0;
+      swState2 = 0;
+    }
+    if(swState == 1 || swState2 == 1){
+      printPlay();
+      swState = 0;
+      swState2 = 0;
+      scoreTime1 = millis();
+      scoreTime2 = millis();
+      startTime = millis();
+      speedTimer = millis();
+      check9 = 1;
+      lcdState = 2;
     }
   }
 
   if(lcdState == 6){
     if(check6 == 1){
-      print_end_message();
+      printEndMessage();
       check6 = 0;
     }
-    if(swState == 1){
+    if(swState == 1 || swState2 == 1){
       lcdState = 8;
       swState = 0;
+      swState2 = 0;
     }
   }
   if(lcdState == 8){ // this lcdState is more like 6.1 state than 8 -- sorry --
@@ -350,16 +431,18 @@ void loop(){
       // memoreaza in eeprom hs-ul
       beatHS = 0;
     }
-    if(swState == 1){
+    if(swState == 1 || swState2 == 1){
       swState = 0;
+      swState2 = 0;
       check7 = 1;
       lcdState = 7;
+      againCursor = 1;
     }
   }
 
   if(lcdState == 7){
     if(check7 == 1){
-      print_play_again();
+      printPlayAgain();
       check7 = 0;
     }
     if (xValue > maxThreshold && joyMoved == false){
@@ -405,11 +488,14 @@ void loop(){
     }
     if(swState == 1 && againCursor == 1){
       swState = 0;
+      swState2 = 1;
       canTheGameStart = 1;
-      lcdState = 2;
+      lcdState = 10;
+      printReadyPlayersJS();
     }
     if(swState == 1 && againCursor == 2){
       lcdState = 0;
+      swState2 = 1;
       canTheGameStart = 1;
     }
   }

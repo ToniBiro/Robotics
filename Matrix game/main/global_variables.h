@@ -19,6 +19,11 @@ LiquidCrystal lcd(RS, enable, d4, d5, d6, d7);
 const int swPin = 2;
 const int xPin = A1;
 const int yPin = A0;
+
+const int swPin2 = 3;
+const int xPin2 = A2;
+const int yPin2 = A3;
+
 const int buttonPin = A5;
 const int buzzer = A4;
 
@@ -34,31 +39,42 @@ struct dino{
 
 unsigned long lastPrint = 0;
 unsigned long lastSwDebounceTime = 0;
+unsigned long lastSwDebounceTime2 = 0;
 unsigned long lastDebounceTime = 0;
 int debounceDelay = 50;
 int pushSwState = 0;
+int pushSwState2 = 0;
 int pushButtonState = 1;
-int buttonState = 1;
+
 int lastButtonState = 1;
 int lastSwState = 0;
+int lastSwState2 = 0;
 const int minThreshold = 400;
 const int maxThreshold = 600;
 int xValue;
 int yValue;
+int xValue2;
+int yValue2;
+
+int buttonState = 1;
 int swState;
+int swState2;
+
 bool joyMoved = false;
+bool joyMoved2 = false;
 cursorPoz cp = {1, 0};
 cursorPoz cpPrev;
 dino dino1 = {6, 1, 5, 1};
 dino dino2 = {2, 6, 1, 6};
-int upCheck = 0, downCheck = 0;
-double gameSpeed = 5000;
+int upCheck = 0, downCheck = 0, upCheck2 = 0, downCheck2 = 0;
+double gameSpeed = 7000;
 const double speedConst = 2500000;
 const double jumpConst = 2500;
 unsigned long speedTimer;
-unsigned long downTime, upTime;
+unsigned long downTime, upTime, downTime2, upTime2;
 double var = 8;
 double jumpInterval = (20000000/(gameSpeed*var));
+double jumpInterval2 = (20000000/(gameSpeed*var));
 
 
 struct highScore{
@@ -74,11 +90,14 @@ highScores theHS;
 
 int beatHS = 0;
 char nameDino1[5], nameDino2[5];
-double scoreDino1 = 0, scoreDino2 = 0;
+int scoreDino1 = 0, scoreDino2 = 0;
 int livesDino1 = 3, livesDino2 = 3;
+unsigned long scoreTime1, scoreTime2;
 
 int first = 1, sec, third, four;
-int done = 1;
+int first2 = 1, sec2, third2, four2;
+int done = 1, done2 = 1;
+
 
 int nObstacle = 14;
 unsigned long startTime = 0;
@@ -103,12 +122,15 @@ int colFlag1 = 0;
 int colFlag2 = 0;
 
 int attackFrame = 14 - 7;
+int attackFrame2 = 2;
 int auxFrame = 0;
-int auxHere = 1;
+int auxHere = 1, auxHere2 = 1;
 int attackHeight;
 unsigned long attackTime;
 int attackCheck = 0;
-
+int attackHeight2;
+unsigned long attackTime2;
+int attackCheck2 = 0;
 
 int lcdState = 0;
 int cursorPosition = 0;
@@ -118,5 +140,7 @@ int check7;
 int canTheGameStart = 0;
 
 int check6 = 1;
+int check10 = 1;
+int check9 = 1;
 
 int lifeGainCounter1 = 0, lifeGainCounter2 = 0;

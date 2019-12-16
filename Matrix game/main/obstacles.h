@@ -1,17 +1,17 @@
 #pragma once
 #include "global_variables.h"
 
-void set_obstacle(){
+void setObstacle(){
   if((frame1+1) * (speedConst/gameSpeed) > millis() - startTime && millis() - startTime >= frame1*(speedConst/gameSpeed) && here == 1){
       lc.setRow(0, heightObstacle1, obstacle[idx1][frame1]);
       lc.setRow(0, heightObstacle2, obstacle[idx2][frame2]);
       here = 0;
       frame1++;
-      if(frame1 == nObstacle){
+      if(frame1 == nObstacle && dino1Collision != 1){
         lifeGainCounter1 += 1;
       }
       frame2--;
-      if(frame2 == 0){
+      if(frame2 == 0 && dino2Collision != 1){
         lifeGainCounter2 += 1;
       }
   }
@@ -20,7 +20,7 @@ void set_obstacle(){
   }
 }
 
-void choose_obstacle(){
+void chooseObstacle(){
 
   if(frame1 >= nObstacle){
     idx1 = rand()%4 + 1;

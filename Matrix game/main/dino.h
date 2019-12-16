@@ -19,13 +19,14 @@ dino poz_dino(dino d){
   lc.setLed(0, d.sp.x, d.sp.y, true);
 }
 
-void dino_jump(){
+// first dino jump ///
+
+void dinoJump(){
   if(downCheck == 1){
     var += 10000;
     downCheck = 0;
   }
   jumpInterval = (20000000/(gameSpeed*var));
-  Serial.println(gameSpeed/jumpConst);
   if(2*(jumpInterval) > millis() - upTime && millis() - upTime >= 1*(jumpInterval)){first = 0; sec = 1; third = 0; four = 0;}
   if(3*(jumpInterval) > millis() - upTime && millis() - upTime >= 2*(jumpInterval)){first = 0; sec = 0; third = 1; four = 0;}
   if(millis() - upTime >= 3*(jumpInterval)){first = 0; sec = 0; third = 0; four = 1;}
@@ -34,8 +35,10 @@ void dino_jump(){
     dino1.fp.y = 1;
     dino1.sp.x = 4;
     dino1.sp.y = 1;
-    lc.setLed(0, 6, 1, false);
+    lc.setLed(0, 3, 1, false);
     lc.setLed(0, 4, 1, true);
+    lc.setLed(0, 5, 1, true);
+    lc.setLed(0, 6, 1, false);
     first = 0;
   }
   if(sec == 1){
@@ -43,8 +46,10 @@ void dino_jump(){
     dino1.fp.y = 1;
     dino1.sp.x = 3;
     dino1.sp.y = 1;
+    lc.setLed(0, 3, 1, true);
+    lc.setLed(0, 4, 1, true);
     lc.setLed(0, 5, 1, false);
-    lc.setLed(0, 3, 1, true); 
+    //lc.setLed(0, 6, 1, false);
     sec = 0;
   }
   if(third == 1){
@@ -53,7 +58,9 @@ void dino_jump(){
     dino1.sp.x = 4;
     dino1.sp.y = 1;
     lc.setLed(0, 3, 1, false);
-    lc.setLed(0, 5, 1, true); 
+    lc.setLed(0, 4, 1, true);
+    lc.setLed(0, 5, 1, true);
+    //lc.setLed(0, 6, 1, false);
     third = 0;
   }
   if(four == 1){
@@ -61,13 +68,78 @@ void dino_jump(){
     dino1.fp.y = 1;
     dino1.sp.x = 5;
     dino1.sp.y = 1;
+    lc.setLed(0, 3, 1, false);
     lc.setLed(0, 4, 1, false);
+    lc.setLed(0, 5, 1, true);
     lc.setLed(0, 6, 1, true);
     four = 0;
   }
 }
 
-void dino_bend(){
+// end first dino jump ///
+
+// second dino jump ///
+
+void dinoJump2(){
+  if(downCheck2 == 1){
+    var += 10000;
+    downCheck2 = 0;
+  }
+  jumpInterval2 = (20000000/(gameSpeed*var));
+  if(2*(jumpInterval2) > millis() - upTime2 && millis() - upTime2 >= 1*(jumpInterval2)){first2 = 0; sec2 = 1; third2 = 0; four2 = 0;}
+  if(3*(jumpInterval2) > millis() - upTime2 && millis() - upTime2 >= 2*(jumpInterval2)){first2 = 0; sec2 = 0; third2 = 1; four2 = 0;}
+  if(millis() - upTime2 >= 3*(jumpInterval2)){first2 = 0; sec2 = 0; third2 = 0; four2 = 1;}
+  if(first2 == 1){
+    dino2.fp.x = 2;
+    dino2.fp.y = 6;
+    dino2.sp.x = 3;
+    dino2.sp.y = 6;
+    lc.setLed(0, 1, 6, false);
+    lc.setLed(0, 2, 6, true);
+    lc.setLed(0, 3, 6, true);
+    lc.setLed(0, 4, 6, false);
+    first2 = 0;
+  }
+  if(sec2 == 1){
+    dino2.fp.x = 3;
+    dino2.fp.y = 6;
+    dino2.sp.x = 4;
+    dino2.sp.y = 6;
+    lc.setLed(0, 1, 6, false);
+    lc.setLed(0, 2, 6, false);
+    lc.setLed(0, 3, 6, true);
+    lc.setLed(0, 4, 6, true);
+    sec2 = 0;
+  }
+  if(third2 == 1){
+    dino2.fp.x = 2;
+    dino2.fp.y = 6;
+    dino2.sp.x = 3;
+    dino2.sp.y = 6;
+    lc.setLed(0, 1, 6, false);
+    lc.setLed(0, 2, 6, true);
+    lc.setLed(0, 3, 6, true);
+    lc.setLed(0, 4, 6, false);
+    third2 = 0;
+  }
+  if(four2 == 1){
+    dino2.fp.x = 1;
+    dino2.fp.y = 6;
+    dino2.sp.x = 2;
+    dino2.sp.y = 6;
+    lc.setLed(0, 1, 6, true);
+    lc.setLed(0, 2, 6, true);
+    lc.setLed(0, 3, 6, false);
+    lc.setLed(0, 4, 6, false);
+    four2 = 0;
+  }
+}
+
+// end second dino jump ///
+
+// first dino bend ///
+
+void dinoBend(){
   if(yValue < minThreshold){
     dino1.fp.x = 6;
     dino1.fp.y = 1;
@@ -89,6 +161,35 @@ void dino_bend(){
     done = 1;
   }
 }
+
+// end first dino bend ///
+
+// second dino bend ///
+
+void dinoBend2(){
+  if(yValue2 < minThreshold){
+    dino2.fp.x = 1;
+    dino2.fp.y = 6;
+    dino2.sp.x = 1;
+    dino2.sp.y = 6;
+    if(done2 == 1){
+      lc.setLed(0, 2, 6, false);
+      lc.setLed(0, 1, 6, true);  
+      done2 = 0;
+    }
+  }
+  else{
+    dino2.fp.x = 1;
+    dino2.fp.y = 6;
+    dino2.sp.x = 2;
+    dino2.sp.y = 6;
+    lc.setLed(0, 1, 6, true);
+    lc.setLed(0, 2, 6, true);
+    done2 = 1;
+  }
+}
+
+// end second dino bend ///
 
 void inGame(){
   // first joystick //
@@ -116,15 +217,15 @@ void inGame(){
   }
   
   if (xValue >= minThreshold && xValue <= maxThreshold && yValue >= minThreshold && yValue <= maxThreshold) {
-    joyMoved= false;
+    joyMoved = false;
   }
   
   if(upCheck == 1){
-    dino_jump();
+    dinoJump();
   }
   else{
     if(downCheck == 1){
-      dino_bend();
+      dinoBend();
     }
   }
 
@@ -149,14 +250,63 @@ void inGame(){
 
   // second joystick //
 
+  if (xValue2 < minThreshold && joyMoved2 == false && swState2 == 0) {
+    if(attackCheck2 == 0){
+      attackCheck2 = 1;
+      attackTime2 = millis();
+      attackHeight2 = dino2.sp.x;
+    }
+    joyMoved2 = true;
+  }
+
+  if (yValue2 > maxThreshold && joyMoved2 == false && swState2 == 0) {
+    if(upCheck2 == 0){
+      upCheck2 = 1;
+      upTime2 = millis();
+    }
+    joyMoved2 = true;
+  }
+  if (yValue2 < minThreshold && joyMoved2 == false && swState2 == 0) {
+    if(downCheck2 == 0){
+      downCheck2 = 1;
+      downTime2 = millis();
+    }
+    joyMoved2 = true;
+  }
+
+  if (xValue2 >= minThreshold && xValue2 <= maxThreshold && yValue2 >= minThreshold && yValue2 <= maxThreshold) {
+    joyMoved2 = false;
+  }
+
+  if(upCheck2 == 1){
+    dinoJump2();
+  }
+  else{
+    if(downCheck2 == 1){
+      dinoBend2();
+    }
+  }
+
+  if(dino2.fp.x == 1 && dino2.fp.y == 6 && dino2.sp.x == 2 && dino2.sp.y == 6){
+    upCheck2 = 0;
+    downCheck2 = 0;
+    first2 = 1;
+    var = 4;
+  }
+
+  if(attackCheck2 == 1){
+    attack2();
+  }
+  if(attackFrame2 == 10){
+    attackCheck2 = 0;
+    attackFrame2 = 0;
+    auxHere2 = 1;
+  }
+
   // end second joystick //
 
-  
-  set_obstacle();
-  choose_obstacle();
-
-//  set_obstacle2();
-//  choose_obstacle2();
+  setObstacle();
+  chooseObstacle();
   
   poz_dino(dino1);
   poz_dino(dino2);
@@ -170,7 +320,7 @@ void inGame(){
   if(dino1Collision == 1 && colFlag1 == 0){
     colFlag1 = 1;
     livesDino1 -= 1;
-    scoreDino1 -= gameSpeed/(scoreDino1*100);
+    scoreDino1 -= 10;
   }
   
   if(dino1Collision == 1){
@@ -186,7 +336,7 @@ void inGame(){
   if(dino2Collision == 1 && colFlag2 == 0){
     colFlag2 = 1;
     livesDino2 -= 1;
-    scoreDino2 -= gameSpeed/(scoreDino2*10);
+    scoreDino2 -= 10;
   }
   
   if(dino2Collision == 1){
@@ -201,11 +351,17 @@ void inGame(){
   }
 
   if(colFlag1 == 0){
-    scoreDino1 += 0.005;
+    if(millis() - scoreTime1 >= 500){
+      scoreDino1 += 1;
+      scoreTime1 = millis();
+    }
   }
 
   if(colFlag2 == 0){
-    scoreDino2 += 0.005;
+    if(millis() - scoreTime2 >= 500){
+      scoreDino2 += 1;
+      scoreTime2 = millis();
+    }
   }
 
   update_highscore();
