@@ -25,12 +25,12 @@ void check_collisinos(){
 
   ////// second dino collision//////
 
-  if(idx2 == 1 && frame2 == 2 || idx2 == 2 && frame2 == 1 || idx2 == 2 && frame2 == 2 || idx2 == 3 && frame2 == 1){
+  if(idx2 == 1 && frame2 == 1 || idx2 == 2 && frame2 == 1 || idx2 == 2 && frame2 == 1 || idx2 == 2 && frame2 == 0){
     if(heightObstacle2 == dino2.fp.x || heightObstacle2 == dino2.sp.x){
       dino2Collision = 1;
     }
   }
-  if(idx2 == 3 && frame2 == 2 || idx2 == 3 && frame2 == 6 || idx2 == 4 && frame2 == 2 || idx2 == 4 && frame2 == 6){
+  if(idx2 == 3 && frame2 == 1 || idx2 == 3 && frame2 == 5 || idx2 == 4 && frame2 == 1 || idx2 == 4 && frame2 == 5){
     if(heightObstacle2 == dino2.fp.x || heightObstacle2 == dino2.sp.x){
       dino2Collision = 1;
     }
