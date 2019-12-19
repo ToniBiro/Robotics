@@ -4,79 +4,29 @@
 #include "dino.h"
 #include "messages.h"
 #include "debounce.h"
+#include "eepromActions.h"
+#include "settings.h"
 
-
-//###### EEPROM code##################
-
-template <class T> int EEPROM_writeAnything(int ee, const T& value)
-{
-    const byte* p = (const byte*)(const void*)&value;
-    unsigned int i;
-    for (i = 0; i < sizeof(value); i++)
-          EEPROM.write(ee++, *p++);
-    return i;
-}
-
-template <class T> int EEPROM_readAnything(int ee, T& value)
-{
-    byte* p = (byte*)(void*)&value;
-    unsigned int i;
-    for (i = 0; i < sizeof(value); i++)
-          *p++ = EEPROM.read(ee++);
-    return i;
-}
-
-//###### end EEPROM code##################
-
-//###### menu code##################
-
-
-
-//###### end menu code##################
-
-//######debounce code##################
-
-
-//######end debounce code##################
-
-//###### dino 1 code##################
-
-//######end dino 1 code##################
-
-//###### obstacle code###################
-
-//######end obstacle code##################
-
-//###### collisinons code##################
-
-//###### end collisinons code##################
-
-//###### attack code##################
-
-//###### end attack code##################
-
-
-//###### in game code##################
-
-//###### end in game code##################
-
-void setup()
-{
-  for(int i = 0; i < 3; ++i){
-    strcpy(theHS.hs[i].na, "AAAA");
-    theHS.hs[i].sc = 0;
-  }
+void setup(){
+  Serial.begin(9600);
+//  for(int i = 0 ; i < 3; ++i){
+//    strcpy(theHS.hs[i].na, "AAAA");
+//    theHS.hs[i].sc = 0;
+//  }
+//  EEPROM_writeAnything(0, theHS);
+  EEPROM_readAnything(0, theHS);
   
   strcpy(nameDino1, "AAAA");
   strcpy(nameDino2, "BBBB");
   srand(time(NULL));
   
-  Serial.begin(9600);
+  
   lcd.begin(16, 2);
   lcd.createChar(0, heart);
   print_intro();
   //delay(5000);
-  
+
+  pinMode(lcdLed, OUTPUT);
   pinMode(xPin, INPUT);
   pinMode(yPin, INPUT);
   pinMode(xPin2, INPUT);
@@ -96,7 +46,8 @@ void setup()
 }
 
 void loop(){
-  
+
+  digitalWrite(lcdLed, lcdLedValue);
   xValue = analogRead(xPin);
   yValue = analogRead(yPin);
   xValue2 = analogRead(xPin2);
@@ -107,7 +58,6 @@ void loop(){
   debounceButton(digitalRead(buttonPin));
   debounceDino1(swValue);
   debounceDino2(swValue2);
-  Serial.println(swState2);
 
   if(buttonState == 1 && checkButton == 0){
     lcd.clear();
@@ -155,8 +105,7 @@ void loop(){
         else{
           lcd.setCursor(11, 1);
           lcd.print(">");
-        }
-          
+        } 
       }
     }
     joyMoved = true;
@@ -164,6 +113,136 @@ void loop(){
 
   if (xValue >= minThreshold && xValue <= maxThreshold && yValue >= minThreshold && yValue <= maxThreshold) {
     joyMoved= false;
+  }
+
+  if(swState == 0 && cursorPosition == 2 && lcdState == 1){
+    // enter settings screen
+    lcdState = 5;
+    check5 = 1;
+    lineScroll = 0;
+    letter = 0;
+    check5_1 = 0;
+  }
+  //settings h
+  if(lcdState == 5){
+    settings();
+  }
+  
+
+  if(swState == 0 && cursorPosition == 4 && lcdState == 1){
+    // enter info screen
+    lcdState = 4;
+    check4 = 1;
+    lineScroll = 0;
+  }
+
+  if(lcdState == 4){
+    if(check4 == 1){
+      check4 = 0;
+      printCreaterName();
+    }
+    if(yValue < minThreshold && joyMoved == false){
+      if(lineScroll <= 0){
+        lineScroll = 2;
+      }
+      else{
+        lineScroll--;
+      }
+      joyMoved = true;
+      check4_1 = 0;
+    }
+    if(yValue > maxThreshold && joyMoved == false){
+      if(lineScroll >= 2){
+        lineScroll = 0;
+      }
+      else{
+        lineScroll++;
+      }
+      joyMoved = true;
+      check4_1 = 0;
+    }
+    
+    if (xValue >= minThreshold && xValue <= maxThreshold && yValue >= minThreshold && yValue <= maxThreshold) {
+      joyMoved= false;
+    }
+
+    if(lineScroll == 0){
+      if(check4_1 == 0){
+        check4_1 = 1;
+        printCreaterName();
+      }
+    }
+    if(lineScroll == 1){
+      if(check4_1 == 0){
+        check4_1 = 1;
+        printGithub();
+      }
+    }
+    if(lineScroll == 2){
+      if(check4_1 == 0){
+        check4_1 = 1;
+        printGameName();
+      }
+    }
+    if(swState == 1){
+      lcdState = 0;
+    }
+  }
+
+  if(swState == 0 && cursorPosition == 3 && lcdState == 1){
+    //enter the highscore screen
+    lcdState = 3;
+    check3 = 0;
+    lineScroll = 0;
+  }
+
+  if(lcdState == 3){
+    // in the HighScore Tab
+    if(check3 == 0){
+      check3 = 1;
+      printHighScoreFirstScreen();
+    }
+    
+    if(lineScroll == 0){
+      if(check3_1 == 0){
+        printHighScoreFirstScreen();
+        check3_1 = 1;
+      }
+    }
+    else{
+      if(check3_1 == 0){
+        printHighScoreSecondScreen();
+        check3_1 = 1;
+      }
+    }
+    
+    if(yValue < minThreshold && joyMoved == false){
+      if(lineScroll == 0){
+        lineScroll = 1;
+      }
+      else{
+        lineScroll = 0;
+      }
+      joyMoved = true;
+      check3_1 = 0;
+    }
+    if(yValue > maxThreshold && joyMoved == false){
+      if(lineScroll == 0){
+        lineScroll = 1;
+      }
+      else{
+        lineScroll = 0;
+      }
+      joyMoved = true;
+      check3_1 = 0;
+    }
+    
+    if (xValue >= minThreshold && xValue <= maxThreshold && yValue >= minThreshold && yValue <= maxThreshold) {
+      joyMoved= false;
+    }
+    if(swState == 1){
+      lcdState = 0;
+    }
   }
 
   if(swState == 0 && cursorPosition == 1 && lcdState == 1 || swState2 == 0 && cursorPosition == 1 && lcdState == 1){
@@ -192,6 +271,9 @@ void loop(){
       lcd.setCursor(4, 1);
       lcd.print("START!!");
       delay(2000);
+      init_ground();
+      poz_dino(dino1);
+      poz_dino(dino2);
       idx1 = 0;
       idx2 = 0;
       scoreDino1 = 0;
@@ -201,7 +283,7 @@ void loop(){
       printPlay();
       lifeGainCounter1 = 0;
       lifeGainCounter2 = 0;
-      gameSpeed = 7000;
+      gameSpeed = 9000;
       startTime = millis();
       scoreTime1 = millis();
       scoreTime2 = millis();
@@ -234,6 +316,13 @@ void loop(){
       scoreTime2 = millis();
       startTime = millis();
       speedTimer = millis();
+
+      if(attackCheck == 1){
+        attackTime = millis();
+      }
+      if(attackCheck2 == 1){
+        attackTime2 = millis();
+      }
       check9 = 1;
       lcdState = 2;
     }
@@ -246,14 +335,16 @@ void loop(){
     }
     if(swState == 1 || swState2 == 1){
       lcdState = 8;
+      update_highscore();
+      EEPROM_writeAnything(0, theHS);
       swState = 0;
       swState2 = 0;
     }
   }
   if(lcdState == 8){ // this lcdState is more like 6.1 state than 8 -- sorry --
+
     if(beatHS != 0){
       print_new_hs();
-      // memoreaza in eeprom hs-ul
       beatHS = 0;
     }
     if(swState == 1 || swState2 == 1){

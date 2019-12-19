@@ -122,3 +122,121 @@ void printReadyPlayersJS(){
   lcd.setCursor(0, 1);
   lcd.print("both of the JS's");
 }
+
+printHighScoreFirstScreen(){
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("1.");
+  lcd.setCursor(2, 0);
+  lcd.print(theHS.hs[0].na);
+  lcd.setCursor(6, 0);
+  lcd.print(":");
+  lcd.setCursor(7, 0);
+  lcd.print(theHS.hs[0].sc);
+  lcd.setCursor(0, 1);
+  lcd.print("2.");
+  lcd.setCursor(2, 1);
+  lcd.print(theHS.hs[1].na);
+  lcd.setCursor(6, 1);
+  lcd.print(":");
+  lcd.setCursor(7, 1);
+  lcd.print(theHS.hs[1].sc);
+
+}
+
+printHighScoreSecondScreen(){
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("3.");
+  lcd.setCursor(2, 0);
+  lcd.print(theHS.hs[2].na);
+  lcd.setCursor(6, 0);
+  lcd.print(":");
+  lcd.setCursor(7, 0);
+  lcd.print(theHS.hs[2].sc);
+}
+
+void printCreaterName(){
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Biro Balan");
+  lcd.setCursor(0, 1);
+  lcd.print("Antonia");  
+}
+
+void printGithub(){
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("github.com/ToniB");
+  lcd.setCursor(0, 1);
+  lcd.print("iro/Robotics"); 
+}
+
+void printGameName(){
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("The Dino Game");
+  lcd.setCursor(0, 1);
+  lcd.print("@UnibucRobotics");
+}
+
+void printChooseName(){
+  lcd.clear();
+  lcd.setCursor(1, 0);
+  lcd.print("Dino1 Name:");
+  lcd.setCursor(12, 0);
+  lcd.print(nameDino1);
+  
+  lcd.setCursor(1, 1);
+  lcd.print("Dino2 Name:");
+  lcd.setCursor(12, 1);
+  lcd.print(nameDino2);
+}
+
+void printLcdControl(){
+  lcd.clear();
+  lcd.setCursor(1, 0);
+  lcd.print("LCD led:");
+  lcd.setCursor(10, 0);
+  lcd.print(lcdLedControl);
+  lcd.setCursor(1, 1);
+  lcd.print("Back to menu");
+}
+
+void printLetters(){
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("ABCDEFGHIJKLMNOP");
+  lcd.setCursor(0, 1);
+  lcd.print("QRSTUVWXYZ");
+}
+
+
+void blinkCaret(int i, int line){
+  if(1000 >= millis() -  blinkTime && millis() -  blinkTime >= 500){
+    lcd.setCursor(12+i, line);
+    lcd.print(" ");
+  }
+  if(millis() -  blinkTime > 1000){
+    lcd.setCursor(12, line);
+    if(line == 0){
+      lcd.print(nameDino1);
+    }
+    else{
+      lcd.print(nameDino2);
+    }
+    blinkTime = millis();
+  }
+}
+
+void blinkLetter(int i, int line){
+  if(2000 >= millis() -  blinkTime && millis() -  blinkTime >= 1000){
+    lcd.setCursor(i, line);
+    lcd.print(" ");
+  }
+  if(millis() -  blinkTime > 2000){
+    lcd.setCursor(i, line);
+    lcd.print(letters[line][i]);
+    blinkTime = millis();
+  }
+}

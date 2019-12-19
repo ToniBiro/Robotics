@@ -7,7 +7,10 @@
 
 
 void init_ground(){
-  lc.setLed(0, 0, 0, true);
+  for(int i = 0; i < 8; ++i){
+    lc.setRow(0, i, B00000000);
+  }
+
   for (int i = 0; i < 8; ++i){
     lc.setLed(0, 0, i, true);
     lc.setLed(0, 7, i, true);
@@ -26,7 +29,7 @@ void dinoJump(){
     var += 10000;
     downCheck = 0;
   }
-  jumpInterval = (20000000/(gameSpeed*var));
+  jumpInterval = (20000000/(10000*var));
   if(2*(jumpInterval) > millis() - upTime && millis() - upTime >= 1*(jumpInterval)){first = 0; sec = 1; third = 0; four = 0;}
   if(3*(jumpInterval) > millis() - upTime && millis() - upTime >= 2*(jumpInterval)){first = 0; sec = 0; third = 1; four = 0;}
   if(millis() - upTime >= 3*(jumpInterval)){first = 0; sec = 0; third = 0; four = 1;}
@@ -85,7 +88,7 @@ void dinoJump2(){
     var += 10000;
     downCheck2 = 0;
   }
-  jumpInterval2 = (20000000/(gameSpeed*var));
+  jumpInterval2 = (20000000/(20000*var));
   if(2*(jumpInterval2) > millis() - upTime2 && millis() - upTime2 >= 1*(jumpInterval2)){first2 = 0; sec2 = 1; third2 = 0; four2 = 0;}
   if(3*(jumpInterval2) > millis() - upTime2 && millis() - upTime2 >= 2*(jumpInterval2)){first2 = 0; sec2 = 0; third2 = 1; four2 = 0;}
   if(millis() - upTime2 >= 3*(jumpInterval2)){first2 = 0; sec2 = 0; third2 = 0; four2 = 1;}
@@ -254,6 +257,7 @@ void inGame(){
     if(attackCheck2 == 0){
       attackCheck2 = 1;
       attackTime2 = millis();
+      auxFrame2 = 0;
       attackHeight2 = dino2.sp.x;
     }
     joyMoved2 = true;
@@ -299,7 +303,8 @@ void inGame(){
   }
   if(attackFrame2 == 10){
     attackCheck2 = 0;
-    attackFrame2 = 0;
+    attackFrame2 = 2;
+    auxFrame2 = 0;
     auxHere2 = 1;
   }
 
@@ -364,7 +369,6 @@ void inGame(){
     }
   }
 
-  update_highscore();
   print_realtime_game_data();
   
   if(lifeGainCounter1 >= 5){

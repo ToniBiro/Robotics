@@ -15,12 +15,13 @@ void attack(){
 }
 
 void attack2(){
-  if((attackFrame2+1) * (speedConst/gameSpeed) > millis() - attackTime2 && millis() - attackTime2 >= attackFrame2*(speedConst/gameSpeed) && auxHere2 == 1){
+  if((auxFrame2+1) * (speedConst/gameSpeed) > millis() - attackTime2 && millis() - attackTime2 >= auxFrame2*(speedConst/gameSpeed) && auxHere2 == 1){
       lc.setRow(0, attackHeight2, obstacle[1][attackFrame2]);
       auxHere2 = 0;
+      auxFrame2++;;
       attackFrame2++;
   }
-  if(attackFrame2 * (speedConst/gameSpeed) <= millis() - attackTime2){
+  if(auxFrame2 * (speedConst/gameSpeed) <= millis() - attackTime2){
     auxHere2 = 1;
   }
 }
