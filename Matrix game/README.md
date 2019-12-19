@@ -27,6 +27,6 @@ Both players scores increases as time passes. The speed of the dinos is independ
 - 1 MAX7219 Driver
 - buzzer - buzzes when a player dies
 - a button to turn on and off the game
-- one potentiometer to control the LCD contrast
+- 1 potentiometer to control the LCD contrast
 
 It will have two scores for each player, a single high score and the number of lives.
