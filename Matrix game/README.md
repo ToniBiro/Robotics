@@ -49,14 +49,14 @@ In the Settings tab the names of both players can be set at the beginning of the
 - cables
 
 <br>
-![components](/ToniBiro/Robotics/blob/master/Matrix%20game/components1.jpeg?raw=true)
+![components](https://github.com//ToniBiro/Robotics/blob/master/Matrix%20game/components1.jpeg?raw=true)
 <br>
-![components2](/ToniBiro/Robotics/blob/master/Matrix%20game/components2.jpeg?raw=true)
+![components2](https://github.com//ToniBiro/Robotics/blob/master/Matrix%20game/components2.jpeg?raw=true)
 <br>
 
 ## Game RoadMap
 <br>
-![RoadMap](/ToniBiro/Robotics/blob/master/Matrix%20game/RoadMap.png?raw=true)
+![RoadMap](https://github.com//ToniBiro/Robotics/blob/master/Matrix%20game/RoadMap.png?raw=true)
 <br>
 
 Video presentation of the game: https://drive.google.com/open?id=18tSA4tWMDqZ451VG3ThfATJcwsQQByDd
