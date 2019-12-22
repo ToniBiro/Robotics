@@ -49,7 +49,7 @@ In the Settings tab the names of both players can be set at the beginning of the
 - cables
 
 <br>
-![components](https://github.com//ToniBiro/Robotics/blob/master/Matrix%20game/components1.jpeg?raw=true)
+![components](https://raw.githubusercontent.com/ToniBiro/Robotics/master/Matrix%20game/components1.jpeg)
 <br>
 ![components2](https://github.com//ToniBiro/Robotics/blob/master/Matrix%20game/components2.jpeg?raw=true)
 <br>
