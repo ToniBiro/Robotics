@@ -25,7 +25,7 @@ First, you must push the reset button in order to access the main menu. From the
 Once the game starts each player has control over its dino. To jump the joystick must be moved upwards, to bend the joystick must be moved downwards and to launch an attack on the other player the joystick must be moved in the direction of the second player.
 If the joystick is moved downwards while the dino is in the air it will hurry the fall.
 ### How to gain points and lives
-At the beginning of the game, both players receive 5 lives. The scores increase as time passes. Every time a player hits an obstacle or an attack launched by the other player one life is lost and 10 points are taken from the score.
+At the beginning of the game, both players receive 5 lives. The scores increase as time passes but also does the speed of the game, so the difficulty increases. Every time a player hits an obstacle or an attack launched by the other player one life is lost and 10 points are taken from the score.
 If a player passes 5 obstacles without being hit he will gain 1 life.
 ### Who wins?
 The game ends when one of the players reaches 0 lives and the player with the highest score wins.
