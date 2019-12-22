@@ -13,8 +13,11 @@ This is how the hidden Google Chrome T-rex game looks like. By pressing the up a
 ### About this game
 
 Looks somewhat similar to this:
+<br>
 ![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/mytrex.png?raw=true)<br>
-<br>//picture with my matrix<br>
+<br>
+![my t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/matrix-doc.png?raw=true)
+<br>
 
 ## How to play
 ### Positioning
@@ -44,3 +47,19 @@ In the Settings tab the names of both players can be set at the beginning of the
 - 1 potentiometer to control the LCD contrast
 - 2 breadboards
 - cables
+
+<br>
+![components] (https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/poze/WhatsApp%20Image%202019-12-22%20at%2020.03.04.jpeg?raw=true)
+<br>
+![components2] (https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/poze/WhatsApp%20Image%202019-12-22%20at%2020.03.14.jpeg?raw=true)
+<br>
+
+## Game RoadMap
+<br>
+![RoadMap] (https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/RoadMap.png?raw=true)
+<br>
+
+Video presentation of the game: https://drive.google.com/open?id=18tSA4tWMDqZ451VG3ThfATJcwsQQByDd
+
+
+Pictures of the project in this reporitory in the galery folder.
