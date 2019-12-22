@@ -7,7 +7,7 @@ This game is inspired by the T-rex game created by Google Chrome to entertain it
 
 ### (For those who don't know)
 ![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/trex.png?raw=true)<br>
-This the hidden Google chrome T-rex game. By pressing the up and down arrow you make the dino jump or bend. You do this in order to avoid hitting the obstacles that you are running toward, in order not to die, cactuses and birds. As time passes your speed increases making it harder to avoid getting hit.
+This is how the hidden Google Chrome T-rex game looks like. By pressing the up and down arrow you make the dino jump or bend. You do this in order to avoid hitting the obstacles that you are running toward, in order not to die, cactuses and birds. As time passes your speed increases making it harder to avoid getting hit.
 ![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/deadtrex.png?raw=true)<br>
 
 ### About this game
@@ -29,6 +29,9 @@ At the beginning of the game, both players receive 5 lives. The scores increase 
 If a player passes 5 obstacles without being hit he will gain 1 life.
 ### Who wins?
 The game ends when one of the players reaches 0 lives and the player with the highest score wins.
+### The main menu
+There you can find the Info, HighScore and Settings tabs. In the Info tab there are all the 'about information' for the game. In the HighScore tab you can find the top 3 highscores reached up to this point.
+In the Settings tab the names of both players can be set at the beginning of the game in order to store the right names in the HighScore tab and here you can also set if you want the lcd led to be turned ON or OFF. 
 
 ## Used hardware
 - Arduino UNO 
