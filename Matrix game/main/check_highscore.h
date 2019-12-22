@@ -2,11 +2,14 @@
 #include "global_variables.h"
 #include "messages.h"
 
-// cllear matrix befor startiung game
-// lcd clear when 
-
 void update_highscore(){
-  if(scoreDino1 >= theHS.hs[0].sc){
+  /*
+   * This code runs only if the lcdState is 6 (if one of the playes has died).
+   * It checks if the highScore is beaten and updates the ranking.
+   * It memorises the first 3 highScores together with the names of the players
+   * in the custom structure "theHS".
+   */
+  if (scoreDino1 >= theHS.hs[0].sc){
     theHS.hs[2] = theHS.hs[1];
     theHS.hs[1] = theHS.hs[0];
     strcpy(theHS.hs[0].na, nameDino1);
@@ -14,20 +17,20 @@ void update_highscore(){
     beatHS = 1;
   }
   else{
-    if(scoreDino1 >= theHS.hs[1].sc){
+    if (scoreDino1 >= theHS.hs[1].sc){
       theHS.hs[2] = theHS.hs[1];
       strcpy(theHS.hs[1].na, nameDino1);
       theHS.hs[1].sc = scoreDino1;
     }
     else{
-      if(scoreDino1 >= theHS.hs[2].sc){
+      if (scoreDino1 >= theHS.hs[2].sc){
         strcpy(theHS.hs[2].na, nameDino1);
         theHS.hs[2].sc = scoreDino1;
       }
     }
   }
 
-  if(scoreDino2 >= theHS.hs[0].sc){
+  if (scoreDino2 >= theHS.hs[0].sc){
     theHS.hs[2] = theHS.hs[1];
     theHS.hs[1] = theHS.hs[0];
     strcpy(theHS.hs[0].na, nameDino2);
@@ -35,13 +38,13 @@ void update_highscore(){
     beatHS = 2;
   }
   else{
-    if(scoreDino2 >= theHS.hs[1].sc){
+    if (scoreDino2 >= theHS.hs[1].sc){
       theHS.hs[2] = theHS.hs[1];
       strcpy(theHS.hs[1].na, nameDino2);
       theHS.hs[1].sc = scoreDino2;
     }
     else{
-      if(scoreDino2 >= theHS.hs[2].sc){
+      if (scoreDino2 >= theHS.hs[2].sc){
         strcpy(theHS.hs[2].na, nameDino2);
         theHS.hs[2].sc = scoreDino2;
       }
@@ -49,8 +52,11 @@ void update_highscore(){
   }
 }
 
-void print_realtime_game_data(){
-  if(scoreDino1+1 % 10 == 0 || scoreDino2+1 % 10 == 0){
+void printRealtimeGameData(){
+  /*
+   * Updates in real-time the score and the number of lives of the players.
+   */
+  if (scoreDino1+1 % 10 == 0 || scoreDino2+1 % 10 == 0){
     lcd.clear();
     printPlay();
   }

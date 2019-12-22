@@ -2,6 +2,9 @@
 #include "global_variables.h"
 
 void debounceDino1(bool reading){
+  /*
+   * Debounce for the sw button of the first player.
+   */
   if (reading != lastSwState) {
     lastSwDebounceTime = millis();
   }
@@ -19,6 +22,9 @@ void debounceDino1(bool reading){
 }
 
 void debounceDino2(bool reading){
+  /*
+   * Debounce for the sw button of the second player.
+   */
   if (reading != lastSwState2) {
     lastSwDebounceTime2 = millis();
   }
@@ -36,6 +42,9 @@ void debounceDino2(bool reading){
 }
 
 void debounceButton(bool reading){
+  /*
+   * Debounce for the reset button.
+   */
   if (reading != lastButtonState) {
     lastDebounceTime = millis();
   }

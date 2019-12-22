@@ -14,19 +14,17 @@ const int d4 = 7;
 const int d5 = 6;
 const int d6 = 5;
 const int d7 = 4;
+
 LiquidCrystal lcd(RS, enable, d4, d5, d6, d7);
 
 const int swPin = 2;
 const int xPin = A1;
 const int yPin = A0;
-
 const int swPin2 = 3;
 const int xPin2 = A2;
 const int yPin2 = A3;
-
 const int buttonPin = A5;
 const int buzzer = A4;
-
 const int lcdLed = 13;
 
 int checkButton = 0;
@@ -38,6 +36,8 @@ struct cursorPoz{
 struct dino{
   cursorPoz fp, sp;
 };
+
+// for debounces
 
 unsigned long lastPrint = 0;
 unsigned long lastSwDebounceTime = 0;
@@ -62,11 +62,12 @@ int buttonState = 1;
 int swState;
 int swState2;
 
+// for the dinos movements
+
+int canTheGameStart = 0;
 bool joyMoved = false;
 bool joyMoved2 = false;
-cursorPoz cp = {1, 0};
-cursorPoz cpPrev;
-dino dino1 = {6, 1, 5, 1};
+dino dino1 = {6, 1, 5, 1};  // the initial dino positions
 dino dino2 = {2, 6, 1, 6};
 int upCheck = 0, downCheck = 0, upCheck2 = 0, downCheck2 = 0;
 double gameSpeed = 9000;
@@ -75,9 +76,10 @@ const double jumpConst = 2500;
 unsigned long speedTimer;
 unsigned long downTime, upTime, downTime2, upTime2;
 double var = 8;
-double jumpInterval = (20000000/(gameSpeed*var));
-double jumpInterval2 = (20000000/(gameSpeed*var));
+double jumpInterval = (20000000/(20000*var));
+double jumpInterval2 = (20000000/(20000*var));
 
+// for the highScore
 
 struct highScore{
   char na[5];
@@ -89,17 +91,19 @@ struct highScores{
 };
 
 highScores theHS;
-
 int beatHS = 0;
+
 char nameDino1[5], nameDino2[5];
 int scoreDino1 = 0, scoreDino2 = 0;
 int livesDino1 = 3, livesDino2 = 3;
 unsigned long scoreTime1, scoreTime2;
+int lifeGainCounter1 = 0, lifeGainCounter2 = 0;
 
 int first = 1, sec, third, four;
 int first2 = 1, sec2, third2, four2;
 int done = 1, done2 = 1;
 
+// for the obstacles 
 
 int nObstacle = 14;
 unsigned long startTime = 0;
@@ -128,20 +132,17 @@ byte heart[] = {
   B00100
 };
 
+// for attack
 
 int here = 1;
 int heightObstacle1 = 6, heightObstacle2 = 1;
 int idx1, idx2;
 int frame1 = 0, frame2 = 0;
 
-int dino1Collision = 0;
-int dino2Collision = 0;
-int colFlag1 = 0;
-int colFlag2 = 0;
-
 int attackFrame = 14 - 7;
 int attackFrame2 = 2;
 int auxFrame = 0;
+int auxFrame2 = 0;
 int auxHere = 1, auxHere2 = 1;
 int attackHeight;
 unsigned long attackTime;
@@ -150,27 +151,26 @@ int attackHeight2;
 unsigned long attackTime2;
 int attackCheck2 = 0;
 
+// for collisions
+
+int dino1Collision = 0;
+int dino2Collision = 0;
+int colFlag1 = 0;
+int colFlag2 = 0;
+
+
 int lcdState = 0;
 int cursorPosition = 0;
 
 int againCursor = 1;
 int check7;
-int canTheGameStart = 0;
 
 int check6 = 1;
 int check10 = 1;
 int check9 = 1;
 
-int lifeGainCounter1 = 0, lifeGainCounter2 = 0;
-
-//in highscore tab
-
-int lineScroll = 0;
 int check3 = 1;
 int check3_1 = 0;
-highScores memHS;
-
-int testInt;
 
 int check4 = 1;
 int check4_1 = 0;
@@ -178,7 +178,9 @@ int check4_1 = 0;
 int check5 = 1;
 int check5_1 = 0;
 
-int auxFrame2 = 0;
+// for the settings
+
+int lineScroll = 0;
 int letter = 0;
 char lcdLedControl[4] = "ON";
 

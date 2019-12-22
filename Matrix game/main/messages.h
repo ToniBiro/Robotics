@@ -1,8 +1,12 @@
 #pragma once
 #include "global_variables.h"
 
+/*
+ * All the messages that are printed through out the game on the LCD
+ * are pozDino as a function here.
+ */
 
-void print_intro(){
+void printIntro(){
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("THE DINO GAME!");
@@ -10,7 +14,7 @@ void print_intro(){
   lcd.print("Press the button");
 }
 
-void print_main_menu(){
+void printMainMenu(){
   lcd.clear();
   lcd.setCursor(1, 0);
   lcd.print("Start");
@@ -42,14 +46,14 @@ void printPlay(){
 
 void printEndMessage(){
   lcd.clear();
-  if(scoreDino1 > scoreDino2){
+  if (scoreDino1 > scoreDino2){
     lcd.setCursor(0, 0);
     lcd.print(nameDino1);
     lcd.setCursor(4, 0);
     lcd.print(" WON");
   }
   else{
-    if(scoreDino1 < scoreDino2){
+    if (scoreDino1 < scoreDino2){
       lcd.setCursor(0, 0);
       lcd.print(nameDino2);
       lcd.setCursor(4, 0);
@@ -71,9 +75,9 @@ void printEndMessage(){
   lcd.print(scoreDino2);
 }
 
-void print_new_hs(){
+void printNewHs(){
   lcd.clear();
-  if(beatHS == 1){
+  if (beatHS == 1){
     lcd.setCursor(0, 0);
     lcd.print("New HighScore:");
     lcd.setCursor(0, 1);
@@ -83,7 +87,7 @@ void print_new_hs(){
     lcd.setCursor(5, 1);
     lcd.print(scoreDino1);
   }
-  if(beatHS == 2){
+  if (beatHS == 2){
     lcd.setCursor(0, 0);
     lcd.print("New HighScore:");
     lcd.setCursor(0, 1);
@@ -141,7 +145,6 @@ printHighScoreFirstScreen(){
   lcd.print(":");
   lcd.setCursor(7, 1);
   lcd.print(theHS.hs[1].sc);
-
 }
 
 printHighScoreSecondScreen(){
@@ -211,15 +214,14 @@ void printLetters(){
   lcd.print("QRSTUVWXYZ");
 }
 
-
 void blinkCaret(int i, int line){
-  if(1000 >= millis() -  blinkTime && millis() -  blinkTime >= 500){
+  if (1000 >= millis() -  blinkTime && millis() -  blinkTime >= 500){
     lcd.setCursor(12+i, line);
     lcd.print(" ");
   }
-  if(millis() -  blinkTime > 1000){
+  if (millis() -  blinkTime > 1000){
     lcd.setCursor(12, line);
-    if(line == 0){
+    if (line == 0){
       lcd.print(nameDino1);
     }
     else{
@@ -230,11 +232,11 @@ void blinkCaret(int i, int line){
 }
 
 void blinkLetter(int i, int line){
-  if(2000 >= millis() -  blinkTime && millis() -  blinkTime >= 1000){
+  if (1000 >= millis() -  blinkTime && millis() -  blinkTime >= 500){
     lcd.setCursor(i, line);
     lcd.print(" ");
   }
-  if(millis() -  blinkTime > 2000){
+  if (millis() -  blinkTime > 1000){
     lcd.setCursor(i, line);
     lcd.print(letters[line][i]);
     blinkTime = millis();
