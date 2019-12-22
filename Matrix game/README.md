@@ -1,32 +1,41 @@
 # The Dino Game
-## Description
-It is a game similar to the dinosaur game that Google chrome offers it's users when there is no internet.
+## Game Instructions
+## Introduction
+This game is inspired by the T-rex game created by Google Chrome to entertain it’s users when they can’t connect to the internet.
 
 ### (For those who don't know)
-![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/trex.png?raw=true)
+![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/trex.png?raw=true)<br>
 This the hidden Google chrome T-rex game. By pressing the up and down arrow you make the dino jump or bend. You do this in order to avoid hitting the obstacles that you are running toward, in order not to die, cactuses and birds. As time passes your speed increases making it harder to avoid getting hit.
-![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/deadtrex.png?raw=true)
+![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/deadtrex.png?raw=true)<br>
 
-### My Dino Game
+### About this game
 
-My game will look somewhat similar to this:
-![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/mytrex.png?raw=true)
+Looks somewhat similar to this:
+![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/mytrex.png?raw=true)<br>
+<br>//picture with my matrix<br>
 
-This game is 2 player. One 8x8 displays will be used. There will be the standard cactus and the bird that will come towards the player and if they touch one life will be lost out of the 5 the player started with.
-The "dino" will be controlled with a joystick and by targeting the other dino with the joystick you will attack. If the attack happens while he is in the air it is possible to trap the second player between two obstacles.
-The game will end the moment one of the players remains with 0 lives and the player with the highest score wins.
-(If a player avoids getting hit by 5 obstacles he will gain one new life.)
+## How to play
+### Positioning
+It is a 2 player game. The players will be facing one another and choose the joysticks accordingly.
+### How to start the game
+First, you must push the reset button in order to access the main menu. From there, the player that controls the joystick closest to the reset button must move the cursor to the ‘Start’ option from the menu and press the joystick. To make sure that both players are ready to play the second joystick must also be pushed.
+### Moving the Dinos
+Once the game starts each player has control over its dino. To jump the joystick must be moved upwards, to bend the joystick must be moved downwards and to launch an attack on the other player the joystick must be moved in the direction of the second player.
+If the joystick is moved downwards while the dino is in the air it will hurry the fall.
+### How to gain points and lives
+At the beginning of the game, both players receive 5 lives. The scores increase as time passes. Every time a player hits an obstacle or an attack launched by the other player one life is lost and 10 points are taken from the score.
+If a player passes 5 obstacles without being hit he will gain 1 life.
+### Who wins?
+The game ends when one of the players reaches 0 lives and the player with the highest score wins.
 
-#### How can you gain points?
-Both players scores increases as time passes. The speed of the dinos is independent of the speed by which the game increases. When you get hit by something your score drops by 10 points.
-
-## Technical requirements
-- will use 2 joysticks
-- 1 8x8 matrix
-- LCD - to show the two player scores and the highscore (the first 3 highscores will be stored in the EEPROM)
+## Used hardware
+- Arduino UNO 
+- 2 joysticks
+- 8x8 matrix
+- LCD screen
 - 1 MAX7219 Driver
 - buzzer - buzzes when a player dies
-- a button to turn on and off the game
+- a reset button
 - 1 potentiometer to control the LCD contrast
-
-It will have two scores for each player, a single high score and the number of lives.
+- 2 breadboards
+- cables
