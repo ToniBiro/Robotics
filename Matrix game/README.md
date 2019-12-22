@@ -8,7 +8,7 @@ This game is inspired by the T-rex game created by Google Chrome to entertain it
 ### (For those who don't know)
 ![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/trex.png?raw=true)<br>
 This is how the hidden Google Chrome T-rex game looks like. By pressing the up and down arrow you make the dino jump or bend. You do this in order to avoid hitting the obstacles that you are running toward, in order not to die, cactuses and birds. As time passes your speed increases making it harder to avoid getting hit.
-![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/deadtrex.png?raw=true)<br>
+![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/RoadMap.png?raw=true)<br>
 
 ### About this game
 
@@ -56,7 +56,7 @@ In the Settings tab the names of both players can be set at the beginning of the
 
 ## Game RoadMap
 <br>
-![RoadMap](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/RoadMap.png?raw=true)
+![RoadMap](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/deadtrex.png?raw=true)
 <br>
 
 Video presentation of the game: https://drive.google.com/open?id=18tSA4tWMDqZ451VG3ThfATJcwsQQByDd
