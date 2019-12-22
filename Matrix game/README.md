@@ -62,4 +62,4 @@ In the Settings tab the names of both players can be set at the beginning of the
 Video presentation of the game: https://drive.google.com/open?id=18tSA4tWMDqZ451VG3ThfATJcwsQQByDd
 
 
-Pictures of the project in this reporitory in the galery folder.
+Pictures of the project in this reporitory in the [galery](https://github.com/ToniBiro/Robotics/tree/master/Matrix%20game/galery) folder.
