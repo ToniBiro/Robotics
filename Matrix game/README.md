@@ -59,7 +59,8 @@ In the Settings tab the names of both players can be set at the beginning of the
 ![RoadMap](https://raw.githubusercontent.com/ToniBiro/Robotics/master/Matrix%20game/RoadMap.png)
 <br>
 
-Video presentation of the game: https://drive.google.com/open?id=18tSA4tWMDqZ451VG3ThfATJcwsQQByDd
+Video presentation of the game: this drive https://drive.google.com/open?id=18tSA4tWMDqZ451VG3ThfATJcwsQQByDd  or this unlisted youtube video https://youtu.be/FHJcDjVYhB8
+
 
 
 Pictures of the project in this reporitory in the [galery](https://github.com/ToniBiro/Robotics/tree/master/Matrix%20game/galery) folder.
