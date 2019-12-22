@@ -51,12 +51,12 @@ In the Settings tab the names of both players can be set at the beginning of the
 <br>
 ![components](https://raw.githubusercontent.com/ToniBiro/Robotics/master/Matrix%20game/components1.jpeg)
 <br>
-![components2](https://github.com//ToniBiro/Robotics/blob/master/Matrix%20game/components2.jpeg?raw=true)
+![components2](https://raw.githubusercontent.com/ToniBiro/Robotics/master/Matrix%20game/components2.jpeg)
 <br>
 
 ## Game RoadMap
 <br>
-![RoadMap](https://github.com//ToniBiro/Robotics/blob/master/Matrix%20game/RoadMap.png?raw=true)
+![RoadMap](https://raw.githubusercontent.com/ToniBiro/Robotics/master/Matrix%20game/RoadMap.png)
 <br>
 
 Video presentation of the game: https://drive.google.com/open?id=18tSA4tWMDqZ451VG3ThfATJcwsQQByDd
