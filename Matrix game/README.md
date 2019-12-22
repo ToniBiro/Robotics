@@ -2,6 +2,7 @@
 ## Game Instructions
 ## Introduction
 This game is inspired by the T-rex game created by Google Chrome to entertain it’s users when they can’t connect to the internet.
+![no_internet](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/no%20internet.png?raw=true)
 
 ### (For those who don't know)
 ![t-rex game](https://github.com/ToniBiro/Robotics/blob/master/Matrix%20game/trex.png?raw=true)<br>
