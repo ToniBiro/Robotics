@@ -53,7 +53,6 @@ In the Settings tab the names of both players can be set at the beginning of the
 
 
 ## Game RoadMap
-<br>
 ![RoadMap](https://raw.githubusercontent.com/ToniBiro/Robotics/master/Matrix%20game/RoadMap.png)
 <br>
 
