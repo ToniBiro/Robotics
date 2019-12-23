@@ -48,11 +48,9 @@ In the Settings tab the names of both players can be set at the beginning of the
 - 2 breadboards
 - cables
 
-<br>
 ![components](https://raw.githubusercontent.com/ToniBiro/Robotics/master/Matrix%20game/components1.jpeg)
-<br>
 ![components2](https://raw.githubusercontent.com/ToniBiro/Robotics/master/Matrix%20game/components2.jpeg)
-<br>
+
 
 ## Game RoadMap
 <br>
