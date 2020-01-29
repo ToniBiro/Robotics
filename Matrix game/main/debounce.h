@@ -37,7 +37,7 @@ void debounceDino2(bool reading){
         swState2 = !swState2;
       }
     }
-  }
+  } 
   lastSwState2 = reading;
 }
 
